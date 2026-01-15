@@ -1,0 +1,23 @@
+a1.1.0
+- Added edit mode.
+Since this release you have to manually select animations to use in quick pick via edit mode.
+You can enter edit mode by clicking button or using keybind (defaults to R) in animation selection menu.
+- Added walk in GUI setting.
+- Added `interpolate` tag that enables interpolation.
+This tag applies to whole animation same as `interruptible` and `resetarms` do.
+As of now there is no support for interpolation toggle in frames.
+- You can now toggle F5 in animations GUI.
+- Other minor GUI changes.
+- Frame Animation protocol version bump (to 3).
+
+a1.0.6
+- Fixed bad packet id 99 on unsupported servers.
+- Fixed bug when you couldn't walk in menu after switching to other animation while some interruptable is playing.
+- Added settings.
+- Added fast keybinds.
+- Added `resetarms` tag that removes idle animation.
+- Button text now changes color on hover.
+- Script syntax is now case-insensitive (completely).
+- Frame Animation protocol version bump (to 2).
+
+Version bump means that a1.0.6 is now incompatible with a1.0.5 and earlier so since this release server version and client version have to match in order to play multiplayer.

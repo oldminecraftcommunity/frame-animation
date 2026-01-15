@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "fa",
+  "version": "${version}",
+  "name": "Frame Animation",
+  "description": "A simple server and client side mod for making player animations.",
+  "authors": [
+    "freehij"
+  ],
+  "license": "MIT",
+  "icon": "assets/fa/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "met.freehij.fa.FrameAnimationClient"
+    ],
+    "server": [
+      "met.freehij.fa.FrameAnimationServer"
+    ]
+  },
+  "mixins": [
+    "fa.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "met.freehij.fa.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CompatChecker",
+    "PacketInitializer"
+  ],
+  "client": [
+    "acessor.client.GuiSlotAccessor",
+    "client.InputHandler",
+    "client.MinecraftMixin",
+    "client.ModelBipedMixin",
+    "client.RenderPlayerMixin"
+  ],
+  "server": [
+    "acessor.server.NetServerHandlerAccessor",
+    "server.CompatHandlerServer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
