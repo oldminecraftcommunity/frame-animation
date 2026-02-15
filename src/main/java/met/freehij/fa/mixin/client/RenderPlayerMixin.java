@@ -13,6 +13,6 @@ public class RenderPlayerMixin {
     @Inject(method = "doRender(Lnet/minecraft/src/EntityPlayer;DDDFF)V", at = @At("HEAD"))
     public void doRender(EntityPlayer player, double e, double f, double g, float h, float k, CallbackInfo ci) {
         AnimationUtilsClient.currentRenderingEid = player.entityId;
-        AnimationUtilsClient.currentTime = k-((int)(k));
+        AnimationUtilsClient.currentTime = k;
     }
 }
