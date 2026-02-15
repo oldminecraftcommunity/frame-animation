@@ -16,7 +16,9 @@
   ],
   "server": [
     "acessor.server.NetServerHandlerAccessor",
-    "server.CompatHandlerServer"
+    "server.CompatHandlerServer",
+    "server.NetServerHandlerMixin",
+    "server.NetworkManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

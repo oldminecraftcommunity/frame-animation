@@ -71,7 +71,7 @@ public class FileUtils {
         }
     }
 
-    public static void loadSettings(Path filePath, Map<String, Object> settings) {
+    public static void loadSettingsFromFile(Path filePath, Map<String, Object> settings) {
         Properties props = new Properties();
         try {
             props.load(Files.newInputStream(filePath));
@@ -84,7 +84,7 @@ public class FileUtils {
         }
     }
 
-    public static void saveSettings(Path filePath, Map<String, Object> settings) {
+    public static void saveSettingsToFile(Path filePath, Map<String, Object> settings) {
         Properties props = new Properties();
         for (Map.Entry<String, Object> entry : settings.entrySet()) {
             props.setProperty(entry.getKey(), entry.getValue().toString());

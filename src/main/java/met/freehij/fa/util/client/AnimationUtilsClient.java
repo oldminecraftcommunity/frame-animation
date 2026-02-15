@@ -2,6 +2,7 @@ package met.freehij.fa.util.client;
 
 import met.freehij.fa.FrameAnimationClient;
 import met.freehij.fa.animation.Animation;
+import met.freehij.fa.animation.BodyPart;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -25,7 +26,19 @@ public class AnimationUtilsClient {
         PlayerAnimationState state = playerAnimations.computeIfAbsent(eid, k -> new PlayerAnimationState());
         state.ticks = 0;
         state.framesToRender.clear();
-        state.framesToRender.addAll(List.of(animation.frames()));
+        List<Animation.Frame> sanitizedFrames = new ArrayList<>();
+        for (Animation.Frame frame : animation.frames()) {
+            Map<BodyPart, Float> sanitizedData = new HashMap<>();
+            for (Map.Entry<BodyPart, Float> entry : frame.data().entrySet()) {
+                float value = entry.getValue();
+                if (Float.isNaN(value) || Float.isInfinite(value)) {
+                    value = 0.0f;
+                }
+                sanitizedData.put(entry.getKey(), value);
+            }
+            sanitizedFrames.add(new Animation.Frame(frame.duration(), sanitizedData));
+        }
+        state.framesToRender.addAll(sanitizedFrames);
         state.active = true;
         state.interruptible = animation.interruptible();
         state.resetArms = animation.resetArms();
@@ -49,7 +62,7 @@ public class AnimationUtilsClient {
             if (state.framesToRender.isEmpty()) {
                 state.active = false;
                 FrameAnimationClient.stopWalk = false;
-                if ((boolean) FrameAnimationClient.settings.get("toggle-thirdperson"))
+                if ((boolean) FrameAnimationClient.clientSettings.get("toggle-thirdperson"))
                     FrameAnimationClient.mc.gameSettings.thirdPersonView = false;
                 iterator.remove();
             }
@@ -91,7 +104,7 @@ public class AnimationUtilsClient {
     public static void cleanupPlayer(int eid) {
         playerAnimations.remove(eid);
         if (eid == FrameAnimationClient.mc.thePlayer.entityId) {
-            if ((boolean) FrameAnimationClient.settings.get("toggle-thirdperson"))
+            if ((boolean) FrameAnimationClient.clientSettings.get("toggle-thirdperson"))
                 FrameAnimationClient.mc.gameSettings.thirdPersonView = false;
             FrameAnimationClient.stopWalk = false;
         }

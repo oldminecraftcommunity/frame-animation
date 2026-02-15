@@ -54,6 +54,7 @@ public class SettingsScreen extends ModScreen {
         } else {
             if (i == Keyboard.KEY_ESCAPE) {
                 if (unsaved) {
+                    unsaved = false;
                     mc.displayGuiScreen(new CloseSettingsScreen(this));
                 } else {
                     mc.displayGuiScreen(this.parent);
@@ -95,7 +96,7 @@ public class SettingsScreen extends ModScreen {
     public void saveSettingsFromButtons() {
         for (Object button : this.controlList) {
             if (button instanceof SettingButton button1) {
-                FrameAnimationClient.settings.put(button1.settingName, button1.getValue());
+                FrameAnimationClient.clientSettings.put(button1.settingName, button1.getValue());
             }
         }
         FrameAnimationClient.saveSettings();

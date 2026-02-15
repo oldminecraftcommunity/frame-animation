@@ -7,7 +7,7 @@ public class BooleanSettingButton extends SettingButton {
 
     public BooleanSettingButton(int id, int x, int y, int width, int height, String settingName, String description) {
         super(id, x, y, width, height, "", settingName, description);
-        this.toggled = (boolean) FrameAnimationClient.settings.get(settingName);
+        this.toggled = (boolean) FrameAnimationClient.clientSettings.get(settingName);
         this.updateString();
     }
 

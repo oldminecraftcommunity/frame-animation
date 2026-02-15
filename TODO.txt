@@ -1,7 +1,12 @@
 a?.?.?
-- Fix NaN and Infinity values making body parts invisible.
-- Make vanilla client be able to join modded server.
-- Add AnimationDataPacket size limit.
 - Add server animations (as a suggestion).
-- Add server settings (and add a toggle to allow/disallow vanilla clients as well as a setting for max packet size for AnimationDataPacket).
-- Rework the networking (particularly fix possible dos/ddos attacks).
+- Add loop mode to client.
+- Proxy to use animations on unsupported servers.
+- Translate and scale functions (and a setting to disable/limit them in server settings or smh idk).
+- Reload button in edit mode.
+- Rework mods base code: 
+1. move compat checks to some other api.
+2. add compiled animations to server.
+3. rework networking to avoid sending a lot of data packets as they can be f*cking huge!
+4. internal error checker with notification system to avoid silent errors/showing errors in console.
+5. general code cleanup.

@@ -1,3 +1,9 @@
+a1.1.1
+- Added server settings.
+- Fixed NaN and Infinity values making body parts invisible.
+- Other minor bug fixes.
+- Vanilla clients can now connect to server (if it's enabled in server settings).
+
 a1.1.0
 - Added edit mode.
 Since this release you have to manually select animations to use in quick pick via edit mode.
@@ -12,12 +18,11 @@ As of now there is no support for interpolation toggle in frames.
 
 a1.0.6
 - Fixed bad packet id 99 on unsupported servers.
-- Fixed bug when you couldn't walk in menu after switching to other animation while some interruptable is playing.
+- Fixed bug when you couldn't walk in menu after switching to other animation while some interruptible is playing.
 - Added settings.
 - Added fast keybinds.
 - Added `resetarms` tag that removes idle animation.
 - Button text now changes color on hover.
 - Script syntax is now case-insensitive (completely).
 - Frame Animation protocol version bump (to 2).
-
 Version bump means that a1.0.6 is now incompatible with a1.0.5 and earlier so since this release server version and client version have to match in order to play multiplayer.

@@ -89,16 +89,16 @@ public class AnimationSelectionScreen extends ModScreen {
 
     @Override
     protected void keyTyped(char c, int i) {
-        if (i == (int) FrameAnimationClient.settings.get("keybind-drop-animation")) {
+        if (i == (int) FrameAnimationClient.clientSettings.get("keybind-drop-animation")) {
             AnimationUtilsClient.cleanupPlayer(FrameAnimationClient.mc.thePlayer.entityId);
             NetworkUtilsClient.sendDropAnimation();
-        } else if (i == (int) FrameAnimationClient.settings.get("keybind-open-settings")) {
+        } else if (i == (int) FrameAnimationClient.clientSettings.get("keybind-open-settings")) {
             mc.displayGuiScreen(new SettingsScreen(this));
         } else if (i == Keyboard.KEY_ESCAPE) {
             if (this.selectionMode) this.selectionMode = false;
             else mc.displayGuiScreen(null);
         } else if (i == Keyboard.KEY_F5) mc.gameSettings.thirdPersonView = !mc.gameSettings.thirdPersonView;
-        else if (i == (int) FrameAnimationClient.settings.get("keybind-edit-mode"))
+        else if (i == (int) FrameAnimationClient.clientSettings.get("keybind-edit-mode"))
             this.toggleSelectionMode();
     }
 

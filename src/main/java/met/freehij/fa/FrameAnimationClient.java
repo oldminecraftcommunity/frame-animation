@@ -1,6 +1,7 @@
 package met.freehij.fa;
 
 import met.freehij.fa.animation.Animation;
+import met.freehij.fa.util.Commons;
 import met.freehij.fa.util.FileUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
@@ -16,25 +17,24 @@ import java.util.Map;
 
 public class FrameAnimationClient implements ClientModInitializer {
     public static final Path ANIMATIONS_FOLDER = Path.of("animations");
-    static final Path CONFIG_FILE = Paths.get("config/animations.properties");
     public static boolean serverSupport = false;
     public static final Minecraft mc = (Minecraft) FabricLoaderImpl.INSTANCE.getGameInstance();
     public static boolean stopWalk = false;
-    public static Map<String, Object> settings = new HashMap<>();
+    public static Map<String, Object> clientSettings = new HashMap<>();
 
     @Override
     public void onInitializeClient() {
-        settings.put("toggle-thirdperson", false);
-        settings.put("walk-in-gui", true);
-        settings.put("keybind-open-menu", Keyboard.KEY_G);
-        settings.put("keybind-drop-animation", Keyboard.KEY_Z);
-        settings.put("keybind-open-settings", Keyboard.KEY_X);
-        settings.put("filename-slot1", "");
-        settings.put("filename-slot2", "");
-        settings.put("filename-slot3", "");
-        settings.put("filename-slot4", "");
-        settings.put("filename-slot5", "");
-        settings.put("keybind-edit-mode", Keyboard.KEY_R);
+        clientSettings.put("toggle-thirdperson", false);
+        clientSettings.put("walk-in-gui", true);
+        clientSettings.put("keybind-open-menu", Keyboard.KEY_G);
+        clientSettings.put("keybind-drop-animation", Keyboard.KEY_Z);
+        clientSettings.put("keybind-open-settings", Keyboard.KEY_X);
+        clientSettings.put("filename-slot0", "");
+        clientSettings.put("filename-slot1", "");
+        clientSettings.put("filename-slot2", "");
+        clientSettings.put("filename-slot3", "");
+        clientSettings.put("filename-slot4", "");
+        clientSettings.put("keybind-edit-mode", Keyboard.KEY_R);
         loadSettings();
         saveSettings();
         try {
@@ -45,21 +45,21 @@ public class FrameAnimationClient implements ClientModInitializer {
     }
 
     public static void loadSettings() {
-        FileUtils.loadSettings(CONFIG_FILE, settings);
+        FileUtils.loadSettingsFromFile(Commons.CONFIG_FILE, clientSettings);
     }
 
     public static void saveSettings() {
-        FileUtils.saveSettings(CONFIG_FILE, settings);
+        FileUtils.saveSettingsToFile(Commons.CONFIG_FILE, clientSettings);
     }
 
     public static void setAnimationFileInSlot(int slot, String fileName) {
-        settings.put("filename-slot" + slot, fileName);
+        clientSettings.put("filename-slot" + slot, fileName);
         saveSettings();
     }
 
     public static Animation getAnimationFileForSlot(int slot) {
         try {
-            String fileName = (String) settings.get("filename-slot" + slot);
+            String fileName = (String) clientSettings.get("filename-slot" + slot);
             if (!fileName.trim().isBlank())
                 return FileUtils.loadFromFile(Paths.get(ANIMATIONS_FOLDER.toString(), fileName));
         } catch (Exception e) {

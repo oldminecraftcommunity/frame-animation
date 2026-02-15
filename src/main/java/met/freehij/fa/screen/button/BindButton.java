@@ -9,7 +9,7 @@ public class BindButton extends SettingButton {
 
     public BindButton(int id, int x, int y, int width, int height, String settingName,
                       String description) {
-        super(id, x, y, width, height, Keyboard.getKeyName((int) FrameAnimationClient.settings.get(settingName)), settingName,
+        super(id, x, y, width, height, Keyboard.getKeyName((int) FrameAnimationClient.clientSettings.get(settingName)), settingName,
                 description);
         this.key = this.displayString;
     }

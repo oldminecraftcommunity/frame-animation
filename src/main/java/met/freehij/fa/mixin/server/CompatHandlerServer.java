@@ -19,9 +19,10 @@ public class CompatHandlerServer {
 
     @Inject(method = "handleLogin", at = @At("HEAD"))
     private void handleLogin(CallbackInfo ci) {
-        if (FrameAnimationServer.uncompatClients.contains(this)) {
-            method_417("You need to install/update Frame Animations mod to join this server.");
-            FrameAnimationServer.uncompatClients.remove(this);
+        if (FrameAnimationServer.uncompatClients.contains(this.netManager)) {
+            if ((boolean) FrameAnimationServer.serverSettings.get("allow-vanilla-clients")) return;
+            method_417("You need to install/update Frame Animation mod to join this server.");
+            FrameAnimationServer.uncompatClients.remove(this.netManager);
         } else {
             this.netManager.addToSendQueue(new ServerSupportNotificationPacket());
         }

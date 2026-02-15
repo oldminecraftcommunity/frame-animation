@@ -27,15 +27,15 @@ public class InputHandler extends MovementInput {
     @Inject(method = "checkKeyForMovementInput", at = @At("HEAD"))
     public void checkKeyForMovementInput(int key, boolean keyDown, CallbackInfo ci) {
         if (keyDown) {
-            if (key == (int) FrameAnimationClient.settings.get("keybind-open-menu")) {
+            if (key == (int) FrameAnimationClient.clientSettings.get("keybind-open-menu")) {
                 Minecraft mc = ((Minecraft) FabricLoaderImpl.INSTANCE.getGameInstance());
                 mc.displayGuiScreen(new AnimationSelectionScreen());
             }
-            if (key == (int) FrameAnimationClient.settings.get("keybind-drop-animation")) {
+            if (key == (int) FrameAnimationClient.clientSettings.get("keybind-drop-animation")) {
                 AnimationUtilsClient.cleanupPlayer(FrameAnimationClient.mc.thePlayer.entityId);
                 NetworkUtilsClient.sendDropAnimation();
             }
-            if (key == (int) FrameAnimationClient.settings.get("keybind-open-settings")) {
+            if (key == (int) FrameAnimationClient.clientSettings.get("keybind-open-settings")) {
                 mc.displayGuiScreen(new SettingsScreen(null));
             }
         }
@@ -44,7 +44,7 @@ public class InputHandler extends MovementInput {
     @Inject(method = "updatePlayerMoveState", at = @At("HEAD"))
     public void updatePlayerMoveState(EntityPlayer player, CallbackInfo ci) {
         if (mc.currentScreen instanceof ModScreen) {
-            if ((boolean) FrameAnimationClient.settings.get("walk-in-gui") && !FrameAnimationClient.stopWalk) {
+            if ((boolean) FrameAnimationClient.clientSettings.get("walk-in-gui") && !FrameAnimationClient.stopWalk) {
                 GameSettings gameSettings = mc.gameSettings;
                 movementKeyStates[0] = Keyboard.isKeyDown(gameSettings.keyBindForward.keyCode);
                 movementKeyStates[1] = Keyboard.isKeyDown(gameSettings.keyBindBack.keyCode);
