@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RenderPlayer.class)
 public class RenderPlayerMixin {
-    @Inject(method = "doRender(Lnet/minecraft/src/EntityPlayer;DDDFF)V", at = @At("HEAD"))
+    @Inject(method = "renderPlayer", at = @At("HEAD"))
     public void doRender(EntityPlayer player, double e, double f, double g, float h, float k, CallbackInfo ci) {
         AnimationUtilsClient.currentRenderingEid = player.entityId;
     }

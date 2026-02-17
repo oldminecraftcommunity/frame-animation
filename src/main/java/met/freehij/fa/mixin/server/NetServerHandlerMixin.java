@@ -15,7 +15,7 @@ public class NetServerHandlerMixin {
     @Shadow
     public NetworkManager netManager;
 
-    @Inject(method = "method_835", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "sendPacket", at = @At("HEAD"), cancellable = true)
     private void sendPacket(Packet packet, CallbackInfo ci) {
         if ((packet instanceof DropAnimationPacket || packet instanceof AnimationDataPacket)
                 && FrameAnimationServer.uncompatClients.contains(netManager)) {

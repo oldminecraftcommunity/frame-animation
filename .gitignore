@@ -16,6 +16,9 @@ classes/
 *.ipr
 *.iws
 
+# Fleet
+.fleet/
+
 # vscode
 
 .settings/
@@ -30,4 +33,5 @@ bin/
 
 # fabric
 
+remappedSrc/
 run/

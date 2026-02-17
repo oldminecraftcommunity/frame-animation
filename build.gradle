@@ -1,50 +1,44 @@
 plugins {
-    id 'babric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.15-SNAPSHOT'
+	id 'ploceus' version '1.15-SNAPSHOT'
 }
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version
+base {
+	archivesName = project.archives_base_name
+}
+version = "${project.version}+mc${project.minecraft_version}"
 group = project.maven_group
 
-loom {
-    gluedMinecraftJar()
-    customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
-    intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
-}
-
-repositories {
-    maven {
-        name = 'Babric'
-        url = 'https://maven.glass-launcher.net/babric'
-    }
-    maven { url = 'https://github.com/FreeCliff/maven/raw/master' }
+ploceus {
+	setIntermediaryGeneration(2)
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "org.wksh:mcp:${project.mappings}"
-    modImplementation "babric:fabric-loader:${project.loader_version}"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    implementation "org.slf4j:slf4j-api:1.8.0-beta4"
-    implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
+	mappings files("mappings/b1.7.3-rmcp.jar")
+	exceptions ploceus.raven(project.raven_build)
+	signatures ploceus.sparrow(project.sparrow_build)
+	nests ploceus.nests(project.nests_build)
 }
 
 processResources {
-    inputs.property "version", project.version
+	inputs.property 'version', version
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
+	filesMatching('fabric.mod.json') {
+		expand 'version': version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = 'UTF-8'
+	it.options.release = 17
 }
 
 java {
-    withSourcesJar()
-}
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
+	withSourcesJar()
 }
