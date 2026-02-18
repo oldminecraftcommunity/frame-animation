@@ -19,12 +19,12 @@ repositories {
         name = 'Babric'
         url = 'https://maven.glass-launcher.net/babric'
     }
-    maven { url = 'https://github.com/FreeCliff/maven/raw/master' }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "org.wksh:mcp:${project.mappings}"
+
+    mappings files("mappings/b1.7.3-rmcp.jar")
     modImplementation "babric:fabric-loader:${project.loader_version}"
 
     implementation "org.slf4j:slf4j-api:1.8.0-beta4"

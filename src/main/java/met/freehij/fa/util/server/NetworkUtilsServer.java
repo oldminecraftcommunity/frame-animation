@@ -19,7 +19,7 @@ public class NetworkUtilsServer {
 
     public static void broadcastPacket(NetHandler netHandler, Packet packet) {
         EntityPlayerMP player = ((NetServerHandlerAccessor) netHandler).getPlayerEntity();
-        ((MinecraftServer) FabricLoaderImpl.INSTANCE.getGameInstance()).method_2165(player.dimension)
-                .method_1668(player, packet);
+        ((MinecraftServer) FabricLoaderImpl.INSTANCE.getGameInstance()).getEntityTracker(player.dimension)
+                .sendPacketToTrackedPlayers(player, packet);
     }
 }
