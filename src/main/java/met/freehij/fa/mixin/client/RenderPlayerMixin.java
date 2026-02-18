@@ -13,5 +13,6 @@ public class RenderPlayerMixin {
     @Inject(method = "renderPlayer", at = @At("HEAD"))
     public void doRender(EntityPlayer player, double e, double f, double g, float h, float k, CallbackInfo ci) {
         AnimationUtilsClient.currentRenderingEid = player.entityId;
+        AnimationUtilsClient.currentTime = k;
     }
 }

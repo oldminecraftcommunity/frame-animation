@@ -12,7 +12,7 @@ import java.util.*;
 public class AnimationUtilsClient {
     public static final Map<Integer, PlayerAnimationState> playerAnimations = new HashMap<>();
     public static int currentRenderingEid = -1;
-
+    public static float currentTime;
     public static class PlayerAnimationState {
         public boolean interruptible = false;
         public boolean resetArms = false;
@@ -90,7 +90,7 @@ public class AnimationUtilsClient {
         if (state != null && state.active && !state.framesToRender.isEmpty()) {
             Animation.Frame currentFrame = state.framesToRender.get(0);
             if (currentFrame.duration() > 0) {
-                return (float) state.ticks / (float) currentFrame.duration();
+                return (float) (state.ticks+AnimationUtilsClient.currentTime) / (float) currentFrame.duration();
             }
         }
         return 0.0F;
