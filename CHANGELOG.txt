@@ -1,3 +1,6 @@
+a1.1.2
+- Added reload button in file selection menu.
+
 a1.1.1
 - Added server settings.
 - Fixed NaN and Infinity values making body parts invisible.

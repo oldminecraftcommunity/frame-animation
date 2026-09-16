@@ -4,15 +4,18 @@ import met.freehij.fa.FrameAnimationClient;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class FolderButton extends StyledButton {
-    public FolderButton(int id, int x, int y) {
+public class TexturedButton extends StyledButton {
+    final String texture;
+
+    public TexturedButton(int id, int x, int y, String texture) {
         super(id, x, y, 10, 10, "");
+        this.texture = texture;
     }
 
     @Override
     public void drawButton(Minecraft minecraft, int mouseX, int mouseY) {
         super.drawButton(minecraft, mouseX, mouseY);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, FrameAnimationClient.mc.renderEngine.getTexture("/assets/fa/textures/gui/folder.png"));
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, FrameAnimationClient.mc.renderEngine.getTexture(this.texture));
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glScalef(1f/32, 1f/32, 1);
