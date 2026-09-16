@@ -1,7 +1,7 @@
 package met.freehij.fa.screen;
 
 import met.freehij.fa.FrameAnimationClient;
-import met.freehij.fa.screen.button.FolderButton;
+import met.freehij.fa.screen.button.TexturedButton;
 import met.freehij.fa.screen.button.StyledButtonWithText;
 import net.minecraft.src.GuiButton;
 import org.lwjgl.Sys;
@@ -25,7 +25,8 @@ public class FileSelectionScreen extends ModScreen {
 
     @Override
     public void initGui() {
-        this.controlList.add(new FolderButton(1, 106, 2));
+        this.controlList.add(new TexturedButton(1, 106, 2, "/assets/fa/textures/gui/folder.png"));
+        this.controlList.add(new TexturedButton(4, 118, 2, "/assets/fa/textures/gui/reload.png"));
         this.controlList.add(new StyledButtonWithText(2, 2, 2, 50, 10, "Back"));
         this.controlList.add(new StyledButtonWithText(3, 54, 2, 50, 10, "Remove"));
         AtomicInteger i = new AtomicInteger(0);
@@ -58,13 +59,17 @@ public class FileSelectionScreen extends ModScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if (button.id >= 10) {
-            FrameAnimationClient.setAnimationFileInSlot(this.slotId, button.displayString);
-        } else if (button.id == 3) {
-            FrameAnimationClient.setAnimationFileInSlot(this.slotId, "");
+        if (button.id == 1) {
+            Sys.openURL(String.valueOf(Path.of("animations")));
+            return;
         }
-        if (button.id == 1) Sys.openURL(String.valueOf(Path.of("animations")));
-        else mc.displayGuiScreen(this.parent);
+        if (button.id == 4) {
+            mc.displayGuiScreen(this);
+            return;
+        }
+        if (button.id >= 10) FrameAnimationClient.setAnimationFileInSlot(this.slotId, button.displayString);
+        else if (button.id == 3) FrameAnimationClient.setAnimationFileInSlot(this.slotId, "");
+        mc.displayGuiScreen(this.parent);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class FileSelectionScreen extends ModScreen {
             boolean first = isFirstOffScreen();
             boolean last = isLastOffScreen();
             for (Object obj : this.controlList) {
-                if (obj instanceof FolderButton) continue;
+                if (obj instanceof TexturedButton) continue;
                 StyledButtonWithText button = (StyledButtonWithText) obj;
                 if (button.id >= 10) {
                     if (dwheel > 0 && first) {
